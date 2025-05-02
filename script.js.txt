@@ -1,0 +1,104 @@
+// Função para cadastrar o usuário
+function cadastrarUsuario(event) {
+    event.preventDefault();
+
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
+
+    if (nome && email && senha) {
+        const usuario = { nome, email, senha };
+
+        // Armazenando os dados do usuário no localStorage
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+
+        alert(`Cadastro realizado com sucesso! Bem-vindo, ${nome}!`);
+        document.getElementById('formCadastro').reset(); // Limpa o formulário
+        window.location.href = "login.html"; // Redireciona para a página de login
+    } else {
+        alert('Por favor, preencha todos os campos!');
+    }
+}
+
+// Função para fazer login do usuário
+function fazerLogin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('emailLogin').value;
+    const senha = document.getElementById('senhaLogin').value();
+
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    // Verifica se o usuário existe e se a senha está correta
+    if (usuario && usuario.email === email && usuario.senha === senha) {
+        alert(`Login realizado com sucesso! Bem-vindo de volta, ${usuario.nome}!`);
+        window.location.href = "apostas.html"; // Redireciona para a página de apostas
+    } else {
+        alert('Email ou senha incorretos!');
+    }
+}
+
+// Função para carregar o perfil do usuário
+function carregarPerfil() {
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    if (usuario) {
+        document.getElementById('nomeUsuario').textContent = usuario.nome;
+        document.getElementById('emailUsuario').textContent = usuario.email;
+        document.getElementById('nomeUsuarioPerfil').textContent = usuario.nome;
+
+        // Carregar o histórico de apostas
+        const historico = JSON.parse(localStorage.getItem('historicoApostas')) || [];
+        const listaApostas = document.getElementById('historicoApostas');
+
+        if (historico.length > 0) {
+            historico.forEach(aposta => {
+                const li = document.createElement('li');
+                li.textContent = `Aposta de R$${aposta.valor} no jogo ${aposta.jogo}`;
+                listaApostas.appendChild(li);
+            });
+        } else {
+            const li = document.createElement('li');
+            li.textContent = "Nenhuma aposta realizada ainda.";
+            listaApostas.appendChild(li);
+        }
+    } else {
+        alert('Usuário não encontrado. Por favor, faça login novamente.');
+        window.location.href = "login.html";
+    }
+}
+
+// Função para realizar o logout
+function logout() {
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('historicoApostas');
+    alert('Você saiu com sucesso!');
+    window.location.href = "index.html"; // Redireciona para a página inicial
+}
+
+function fazerAposta(tipo) {
+    const valorInput = document.getElementById(`valor${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`);
+    const valor = parseFloat(valorInput.value);
+
+    if (isNaN(valor) || valor <= 0) {
+        alert("Por favor, insira um valor válido para apostar.");
+        return;
+    }
+
+    totalApostado += valor;
+    document.getElementById("totalApostado").textContent = totalApostado.toFixed(2);
+
+    const aposta = {
+        jogo: tipo,
+        valor: valor
+    };
+
+    // Armazenando no histórico de apostas
+    let historico = JSON.parse(localStorage.getItem('historicoApostas')) || [];
+    historico.push(aposta);
+    localStorage.setItem('historicoApostas', JSON.stringify(historico));
+
+    alert(`Você apostou R$${valor.toFixed(2)} no ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}!`);
+    valorInput.value = "";
+}
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostas - Site de Apostas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Apostas Disponíveis</h1>
+    </header>
+
+    <main>
+        <section class="apostas">
+            <h2>Escolha uma opção para apostar</h2>
+            <div class="opcoes-apostas">
+                <div class="aposta">
+                    <h3>Futebol - Jogo A</h3>
+                    <p>Real Madrid vs Barcelona</p>
+                    <label for="valorFutebol">Valor da Aposta:</label>
+                    <input type="number" id="valorFutebol" name="valorFutebol" placeholder="Valor em R$" required>
+                    <button onclick="fazerAposta('futebol')">Apostar</button>
+                </div>
+
+                <div class="aposta">
+                    <h3>Basquete - Jogo B</h3>
+                    <p>Miami Heat vs Los Angeles Lakers</p>
+                    <label for="valorBasquete">Valor da Aposta:</label>
+                    <input type="number" id="valorBasquete" name="valorBasquete" placeholder="Valor em R$" required>
+                    <button onclick="fazerAposta('basquete')">Apostar</button>
+                </div>
+
+                <div class="aposta">
+                    <h3>Fórmula 1 - Jogo C</h3>
+                    <p>Grand Prix de Mônaco</p>
+                    <label for="valorFormula1">Valor da Aposta:</label>
+                    <input type="number" id="valorFormula1" name="valorFormula1" placeholder="Valor em R$" required>
+                    <button onclick="fazerAposta('formula1')">Apostar</button>
+                </div>
+            </div>
+
+            <h3>Total Apostado: R$<span id="totalApostado">0</span></h3>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Site de Apostas</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<div class="aposta">
+    <h3>Futebol - Jogo A</h3>
+    <p>Real Madrid vs Barcelona</p>
+    <label for="valorFutebol">Valor da Aposta:</label>
+    <input type="number" id="valorFutebol" name="valorFutebol" placeholder="Valor em R$" required>
+    <button onclick="fazerAposta('futebol')">Apostar</button>
+</div>
+
+<!-- Mais apostas aqui... -->

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Site de Apostas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo, <span id="nomeUsuario"></span></h1>
+    </header>
+
+    <main>
+        <section class="perfil">
+            <h2>Informações do Usuário</h2>
+            <p>Email: <span id="emailUsuario"></span></p>
+            <p>Nome: <span id="nomeUsuarioPerfil"></span></p>
+
+            <h3>Apostas Anteriores:</h3>
+            <ul id="historicoApostas">
+                <!-- Histórico de apostas será carregado aqui -->
+            </ul>
+
+            <button onclick="logout()">Sair</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Site de Apostas</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
